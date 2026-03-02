@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Drivers Data</title>
+    <link rel="stylesheet" href="driver.css">
+</head>
+<body>
+
+    <main class="display-container">
+        
+        <select id="driverSelect" class="custom-selector">
+           <option value="Verstappen">Max Verstappen</option>
+           <option value="Norris">Lando Norris</option>
+           <option value="Piastri">Oscar Piastri</option>
+           <option value="Russell">George Russell</option>
+           <option value="Antonelli">Kimi Antonelli</option>
+           <option value="Hadjar">Isack Hadjar</option>
+           <option value="Leclerc">Charles Leclerc</option>
+           <option value="Hamilton">Lewis Hamilton</option>
+           <option value="Gasly">Pierre Gasly</option>
+           <option value="Colapinto">Franco Colapinto</option>
+           <option value="Stroll">Lance Stroll</option>
+           <option value="Alonso">Fernando Alonso</option>
+           <option value="Hulkenberg">Nico Hulkenberg</option>
+           <option value="Bortoleto">Gabriel Bortoleto</option>
+           <option value="Perez">Sergio Perez</option>
+           <option value="Bottas">Valtteri Bottas</option>
+           <option value="Bearman">Oliver Bearman</option>
+           <option value="Ocon">Esteban Ocon</option>
+           <option value="Lawson">Liam Lawson</option>
+           <option value="Lindblad">Arvid Lindblad</option>
+           <option value="Sainz">Carlos Sainz</option>
+           <option value="Albon">Alexander Albon</option>
+        </select>
+       
+        <h2 id="driverName">Driver Name</h2>
+        <p id="teamName" class="sub-heading">Team Name</p>
+        
+        <div class="media-container">
+            <img id="driverImg" src="" alt="Driver Image" class="main-img">
+        </div>
+
+       <div class="stats-grid">
+            <div class="stat-box">
+                <h3>Country</h3>
+                <p id="driverCountry">-</p>
+            </div>
+            
+            <div class="stat-box">
+                <h3>Points</h3>
+                <p id="points">-</p>
+            </div>
+            
+            <div class="stat-box">
+                <h3>Podiums</h3>
+                <p id="podiums">-</p>
+            </div>
+            
+            <div class="stat-box">
+                <h3>Titles</h3>
+                <p id="driverTitles">-</p>
+            </div>
+
+            <div class="stat-box">
+                <h3>Pole Positions</h3>
+                <p id="poles">-</p>
+            </div>
+
+            <div class="stat-box">
+                <h3>DNFs</h3>
+                <p id="DNFs">-</p>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        const driversData ={
+        Verstappen: {
+        name: "Max Verstappen",
+        team: "Red Bull Racing",
+        country: "Netherlands",
+        podiums: "127",
+        points: "3444.5",
+        titles: "4",
+        poles:"48",
+        DNFs: "33",
+        img: "max.jpg",
+    },
+    Hadjar: {
+        name: "Isack Hadjar",
+        team: "Red Bull Racing",
+        country: "France",
+        podiums: "1",
+        points: "51",
+        titles: "0",
+        poles:"0",
+        DNFs: "2",
+        img: "isack.jpg"
+    },
+    Sainz: {
+        name: "Carlos Sainz",
+        team: "Williams",
+        country: "Spain",
+        podiums: "29",
+        points: "1336.5",
+        titles: "0",
+        poles:"4",
+        DNFs: "42",
+        img: "carlos.jpg"
+    },
+    Albon: {
+        name: "Alexander Albon",
+        team: "Williams",
+        country: "Thailand",
+        podiums: "2",
+        points: "313",
+        titles: "0",
+        poles:"0",
+        DNFs: "22",
+        img: "Albon.jpg"
+    },
+    Lawson: {
+        name: "Liam Lawson",
+        team: "Racing Bulls",
+        country: "New Zealand",
+        podiums: "0",
+        points: "44",
+        titles: "0",
+        poles:"0",
+        DNFs: "6",
+        img: "Lawson.jpg"
+    },
+    Lindblad: {
+        name: "Arvid Lindblad",
+        team: "Racing Bulls",
+        country: "France",
+        podiums: "0",
+        points: "0",
+        titles: "0",
+        poles:"0",
+        DNFs: "0",
+        img: "Lindblad.jpg"
+    },
+    Russell: {
+        name: "George Russell",
+        team: "Mercedes",
+        country: "United Kingdom",
+        podiums: "24",
+        points: "1033",
+        titles: "0",
+        poles:"7",
+        DNFs: "19",
+        img: "Russell.png"
+    },
+    Antonelli: {
+        name: "Kimi Antonelli",
+        team: "Mercedes",
+        country: "Italy",
+        podiums: "3",
+        points: "150",
+        titles: "0",
+        poles:"0",
+        DNFs: "4",
+        img: "Antonelli.jpg"
+    },
+    Norris: {
+        name: "Lando Norris",
+        team: "McLaren",
+        country: "United Kingdom",
+        podiums: "44",
+        points: "1430",
+        titles: "0",
+        poles:"16",
+        DNFs: "13",
+        img: "lando.jpg"
+    },
+    Piastri: {
+        name: "Oscar Piastri",
+        team: "McLaren",
+        country: "Australia",
+        podiums: "26",
+        points: "799",
+        titles: "0",
+        poles:"6",
+        DNFs: "4",
+        img: "oscar.jpg",
+    },
+    Bearman: {
+        name: "Oliver Bearman",
+        team: "Haas F1 Team",
+        country: "United Kingdom",
+        podiums: "0",
+        points: "48",
+        titles: "0",
+        poles:"0",
+        DNFs: "3",
+        img: "Oliver.jpg"
+    },
+    Ocon: {
+        name: "Esteban Ocon",
+        team: "Haas F1 Team",
+        country: "France",
+        podiums: "4",
+        points: "483",
+        titles: "0",
+        poles:"0",
+        DNFs: "25",
+        img: "Ocon.jpg"
+    },
+    Leclerc: {
+        name: "Charles Leclerc",
+        team: "Ferrari",
+        country: "Monaco",
+        podiums: "50",
+        points: "1672",
+        titles: "0",
+        poles:"27",
+        DNFs: "23",
+        img: "charles.jpg"
+    },
+    Hamilton: {
+        name: "Lewis Hamilton",
+        team: "Ferrari",
+        country: "United Kingdom",
+        podiums: "202",
+        points: "5018.5",
+        titles: "7",
+        poles:"104",
+        DNFs: "34",
+        img: "lewis.jpg"
+    },
+    Bottas: {
+        name: "Valtteri Bottas",
+        team: "Cadillac",
+        country: "Finland",
+        podiums: "67",
+        points: "1797",
+        titles: "0",
+        poles:"20",
+        DNFs: "28",
+        img: "Bottas.jpg"
+    },
+    Perez: {
+        name: "Sergio Perez",
+        team: "Cadillac",
+        country: "Mexico",
+        podiums: "39",
+        points: "1638",
+        titles: "0",
+        poles:"3",
+        DNFs: "39",
+        img: "Perez.jpg"
+    },
+    Bortoleto: {
+        name: "Gabriel Bortoleto",
+        team: "Audi",
+        country: "Brazil",
+        podiums: "0",
+        points: "19",
+        titles: "0",
+        poles:"0",
+        DNFs: "5",
+        img: "Bortoleto.jpg"
+    },
+    Hulkenberg: {
+        name: "Nico Hulkenberg",
+        team: "Audi",
+        country: "Germany",
+        podiums: "1",
+        points: "622",
+        titles: "0",
+        poles:"1",
+        DNFs: "44",
+        img: "Nico.jpg"
+    },
+    Stroll: {
+        name: "Lance Stroll",
+        team: "Aston Martin",
+        country: "Canada",
+        podiums: "3",
+        points: "483",
+        titles: "0",
+        poles:"1",
+        DNFs: "31",
+        img: "Stroll.jpg"
+    },
+    Alonso: {
+        name: "Fernando Alonso",
+        team: "Aston Martin",
+        country: "Spain",
+        podiums: "106",
+        points: "2333",
+        titles: "2",
+        poles:"22",
+        DNFs: "83",
+        img: "Alonso.jpg"
+    },
+    Colapinto: {
+        name: "Franco Colapinto",
+        team: "Alpine",
+        country: "Argentina",
+        podiums: "0",
+        points: "5",
+        titles: "0",
+        poles:"0",
+        DNFs: "3",
+        img: "Colapinto.jpg"
+    },
+    Gasly: {
+        name: "Pierre Gasly",
+        team: "Alpine",
+        country: "France",
+        podiums: "5",
+        points: "458",
+        titles: "0",
+        poles:"0",
+        DNFs: "26",
+        img: "Gasly.jpg"
+    },
+}
+
+           
+
+        const selector = document.getElementById("driverSelect");
+
+        function updateDriverInfo() {
+            const data = driversData[selector.value];
+            if (data) {
+            
+                document.getElementById("driverName").innerText = data.name;
+                document.getElementById("teamName").innerText = data.team;
+                document.getElementById("driverCountry").innerText = data.country;
+                document.getElementById("podiums").innerText = data.podiums;
+                document.getElementById("driverTitles").innerText = data.titles;
+                document.getElementById("poles").innerText = data.poles;
+                document.getElementById("DNFs").innerText = data.DNFs;
+                document.getElementById("driverImg").src = data.img;
+                document.getElementById("points").innerText = data.points;
+            }
+        }
+
+        selector.addEventListener("change", updateDriverInfo);
+        window.onload = updateDriverInfo;
+    </script>
+</body>
+</html>

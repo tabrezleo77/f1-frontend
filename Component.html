@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Component Details</title>
+    <link rel="stylesheet" href="comp.css">
+</head>
+<body>
+   <section class="slider">
+
+  <div class="slide active">
+    <div class="overlay">
+      <h2>Internal Combustion Engine (ICE)</h2>
+      <p>
+        The 1.6L V6 turbo ICE prioritizes efficiency and longevity over peak RPM.
+        Engines are detuned to survive multiple race weekends under extreme stress.
+      </p>
+    </div>
+  </div>
+
+  <div class="slide">
+    <div class="overlay">
+      <h2>Turbocharger</h2>
+      <p>
+        Operating beyond 120,000 rpm, the turbocharger faces extreme thermal shock
+        and relies on precise electronic control and lubrication.
+      </p>
+    </div>
+  </div>
+
+  <div class="slide">
+    <div class="overlay">
+      <h2>MGU-K</h2>
+      <p>
+        The MGU-K recovers braking energy and redeploys up to 120 kW to the crankshaft,
+        demanding flawless cooling and torque control.
+      </p>
+    </div>
+  </div>
+
+  <div class="slide">
+    <div class="overlay">
+      <h2>MGU-H</h2>
+      <p>
+        Mounted on the turbo shaft, the MGU-H controls turbo speed and energy harvesting
+        under extreme heat, vibration, and rotational stress.
+      </p>
+    </div>
+  </div>
+
+  <div class="slide">
+    <div class="overlay">
+      <h2>Energy Store</h2>
+      <p>
+        A high-density lithium-ion battery handling rapid charge and discharge cycles.
+        Thermal management and cell balance define its reliability.
+      </p>
+    </div>
+  </div>
+
+  <div class="slide">
+    <div class="overlay">
+      <h2>Control Electronics (CE)</h2>
+      <p>
+        Control electronics manage energy flow across the power unit.
+        Software reliability is as critical as hardware durability.
+      </p>
+    </div>
+  </div>
+
+  <div class="slide">
+    <div class="overlay">
+      <h2>Fuel & Lubrication System</h2>
+      <p>
+        High-pressure fuel injection and dry-sump lubrication demand absolute precision.
+        Any pressure loss can destroy the engine within seconds.
+      </p>
+    </div>
+  </div>
+
+  <div class="slide">
+    <div class="overlay">
+      <h2>Cooling Systems</h2>
+      <p>
+        Multiple cooling loops manage engine, oil, ERS, and charge air temperatures.
+        Cooling limitations often dictate race strategy.
+      </p>
+    </div>
+  </div>
+
+  <div class="slide">
+    <div class="overlay">
+      <h2>Gearbox</h2>
+      <p>
+        The eight-speed sequential gearbox is a stressed structural component.
+        Smooth torque delivery is essential for drivetrain reliability.
+      </p>
+    </div>
+  </div>
+
+</section>
+<script>
+    const slides = document.querySelectorAll('.slide');
+
+slides.forEach(slide => {
+  slide.addEventListener('click', () => {
+    
+    document.querySelector('.slide.active').classList.remove('active');
+    
+    
+    slide.classList.add('active');
+  });
+});
+</script>
+
+</body>
+</html>

@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pit Stop</title>
+    <link rel="stylesheet" href="pit.css">
+</head>
+<body>
+    <div class="wrapper">
+
+  <div class="list">
+    <div class="tab active" data-target="one">ONE-STOP STRATEGY</div>
+    <div class="tab" data-target="two">TWO-STOP STRATEGY</div>
+    <div class="tab" data-target="three">THREE-STOP STRATEGY</div>
+    <div class="tab" data-target="four">UNDERCUT STRATEGY</div>
+    <div class="tab" data-target="five">OVERCUT STRATEGY</div>
+    <div class="tab" data-target="six">SAFETY CAR PIT STOP</div>
+  </div>
+
+  <div class="content-box">
+
+    <div class="content active" id="one">
+      <p>
+        A one-stop strategy relies on tyre preservation and track position.
+        Drivers run longer stints on harder compounds, accepting slower pace to
+        avoid extra pit loss.
+        <br><br>
+        <strong>Example:</strong> Lewis Hamilton won the Russian Grand Prix 2015
+        using a one-stop, controlling tyre wear while rivals needed additional stops.
+      </p>
+    </div>
+
+    <div class="content" id="two">
+      <p>
+        The two-stop strategy balances speed and tyre life, allowing drivers to
+        push harder on fresher tyres. It is the most common modern F1 approach.
+        <br><br>
+        <strong>Example:</strong> Max Verstappen won the French Grand Prix 2021 by
+        switching to a faster two-stop while rivals stayed on one.
+      </p>
+    </div>
+
+    <div class="content" id="three">
+      <p>
+        Three-stop strategies are aggressive and pace-focused, sacrificing pit
+        time for maximum grip. They work only when tyre degradation is extreme.
+        <br><br>
+        <strong>Example:</strong> Michael Schumacher won the French Grand Prix 2004
+        using a four-stint strategy, pushing qualifying-level laps.
+      </p>
+    </div>
+
+    <div class="content" id="four">
+      <p>
+        An undercut involves pitting earlier than rivals to exploit the pace of
+        fresh tyres. Timing and traffic prediction must be perfect.
+        <br><br>
+        <strong>Example:</strong> Sebastian Vettel won the Singapore Grand Prix 2019
+        by undercutting his teammate and controlling the race.
+      </p>
+    </div>
+
+    <div class="content" id="five">
+      <p>
+        The overcut keeps a driver out longer while rivals pit, using clear air
+        or strong tyre warm-up to gain time.
+        <br><br>
+        <strong>Example:</strong> Fernando Alonso won the European Grand Prix 2012
+        by extending stints and capitalizing after others pitted.
+      </p>
+    </div>
+
+    <div class="content" id="six">
+      <p>
+        Safety car pit stops reduce pit loss and allow cheap tyre changes.
+        Entire races can be decided by perfect timing.
+        <br><br>
+        <strong>Example:</strong> Daniel Ricciardo won the Chinese Grand Prix 2018
+        after pitting under a safety car and overtaking rivals.
+      </p>
+    </div>
+
+  </div>
+
+</div>
+<script>
+  const tabs = document.querySelectorAll(".tab");
+  const contents = document.querySelectorAll(".content");
+
+  tabs.forEach(tab => {
+    tab.addEventListener("click", () => {
+
+    
+      tabs.forEach(t => t.classList.remove("active"));
+
+      
+      contents.forEach(c => c.classList.remove("active"));
+
+      
+      tab.classList.add("active");
+
+    
+      const targetId = tab.getAttribute("data-target");
+      const targetContent = document.getElementById(targetId);
+
+      if (targetContent) {
+        targetContent.classList.add("active");
+      }
+    });
+  });
+</script>
+</body>
+</html>

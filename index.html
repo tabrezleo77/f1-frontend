@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Universal F1 Telemetry Dashboard</title>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #0a0a0a;
+      color: white;
+      padding: 30px;
+    }
+
+    h1 {
+      margin-bottom: 20px;
+      color: #e10600;
+    }
+
+    .controls {
+      margin-bottom: 20px;
+    }
+
+    select {
+      padding: 10px 14px;
+      margin-right: 12px;
+      border-radius: 6px;
+      border: none;
+      font-size: 14px;
+      background: #1c1c1c;
+      color: white;
+      cursor: pointer;
+    }
+
+    .status {
+      margin: 15px 0;
+      font-size: 14px;
+      color: #bbbbbb;
+      min-height: 20px;
+    }
+
+    .error {
+      color: #ff4d4d;
+      font-weight: bold;
+    }
+
+    .chart-container {
+      height: 460px;
+      background: #121212;
+      padding: 20px;
+      border-radius: 12px;
+      box-shadow: 0 0 20px rgba(0,0,0,0.6);
+    }
+  </style>
+</head>
+<body>
+
+<h1>F1 Universal Telemetry Dashboard</h1>
+
+<div class="controls">
+  <select id="year">
+    <option value="">Select Season</option>
+    <option value="2024">2024</option>
+    <option value="2023">2023</option>
+    <option value="2022">2022</option>
+    <option value="2021">2021</option>
+  </select>
+
+  <select id="driver">
+    <option value="">Select Driver</option>
+    <option value="VER">Max Verstappen (VER)</option>
+    <option value="HAM">Lewis Hamilton (HAM)</option>
+    <option value="LEC">Charles Leclerc (LEC)</option>
+    <option value="NOR">Lando Norris (NOR)</option>
+    <option value="ALO">Fernando Alonso (ALO)</option>
+    <option value="SAI">Carlos Sainz (SAI)</option>
+  </select>
+
+  <select id="race">
+    <option value="">Select Track</option>
+    <option value="Monza">Monza</option>
+    <option value="Silverstone">Silverstone</option>
+    <option value="Bahrain">Bahrain</option>
+    <option value="Spa">Spa</option>
+    <option value="Suzuka">Suzuka</option>
+    <option value="Singapore">Singapore</option>
+    <option value="Miami">Miami</option>
+    <option value="Imola">Imola</option>
+  </select>
+</div>
+
+<div class="status" id="status">
+  Select season, driver, and track to load telemetry.
+</div>
+
+<div class="chart-container">
+  <canvas id="telemetryChart"></canvas>
+</div>
+
+<script>
+/* =========================
+   API BASE (YOUR RENDER LINK)
+========================= */
+const API_BASE = "https://f1-telemetry-backend-mheu.onrender.com";
+
+/* =========================
+   CHART SETUP
+========================= */
+const ctx = document.getElementById("telemetryChart").getContext("2d");
+
+const telemetryChart = new Chart(ctx, {
+  type: "line",
+  data: {
+    labels: [],
+    datasets: [{
+      label: "Lap Time (seconds)",
+      data: [],
+      borderWidth: 3,
+      tension: 0.35,
+      pointRadius: 0
+    }]
+  },
+  options: {
+    responsive: true,
+    maintainAspectRatio: false,
+    animation: false,
+    plugins: {
+      legend: {
+        labels: { color: "white" }
+      }
+    },
+    scales: {
+      x: {
+        title: {
+          display: true,
+          text: "Lap Number",
+          color: "white"
+        },
+        ticks: { color: "white" }
+      },
+      y: {
+        title: {
+          display: true,
+          text: "Lap Time (s)",
+          color: "white"
+        },
+        ticks: { color: "white" }
+      }
+    }
+  }
+});
+
+/* =========================
+   STATUS HELPER
+========================= */
+const statusEl = document.getElementById("status");
+
+function setStatus(message, isError = false) {
+  statusEl.textContent = message;
+  statusEl.className = isError ? "status error" : "status";
+}
+
+/* =========================
+   LOAD TELEMETRY (FIXED)
+========================= */
+async function loadTelemetry() {
+  const season = document.getElementById("year").value;
+  const driver = document.getElementById("driver").value;
+  const track = document.getElementById("race").value;
+
+  if (!season || !driver || !track) {
+    setStatus("Please select Season, Driver, and Track.");
+    return;
+  }
+
+  // FINAL CORRECT API URL USING YOUR RENDER LINK
+  const url = `${API_BASE}/lap-times?season=${season}&driver=${driver}&track=${track}`;
+  console.log("Fetching from:", url);
+
+  setStatus("Loading telemetry data from backend...");
+
+  try {
+    const response = await fetch(url);
+
+    if (!response.ok) {
+      throw new Error(`API Error: ${response.status}`);
+    }
+
+    const data = await response.json();
+    console.log("Backend Data:", data);
+
+    if (!data.laps || !data.times || data.laps.length === 0) {
+      throw new Error("No telemetry data returned");
+    }
+
+    telemetryChart.data.labels = data.laps;
+    telemetryChart.data.datasets[0].data = data.times;
+    telemetryChart.update();
+
+    setStatus(
+      `Loaded: ${driver} | ${track} | ${season} (${data.laps.length} laps)`
+    );
+
+  } catch (error) {
+    console.error("Error:", error);
+    setStatus("Failed to load backend data. Showing demo data.", true);
+
+    // fallback demo data
+    const demoLaps = Array.from({ length: 20 }, (_, i) => i + 1);
+    const demoTimes = demoLaps.map(lap => 92 + Math.sin(lap / 2) * 0.8);
+
+    telemetryChart.data.labels = demoLaps;
+    telemetryChart.data.datasets[0].data = demoTimes;
+    telemetryChart.update();
+  }
+}
+
+/* =========================
+   EVENT LISTENERS
+========================= */
+document.getElementById("year").addEventListener("change", loadTelemetry);
+document.getElementById("driver").addEventListener("change", loadTelemetry);
+document.getElementById("race").addEventListener("change", loadTelemetry);
+</script>
+
+</body>
+</html>
