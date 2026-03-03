@@ -7,12 +7,18 @@
 
 body {
   min-height: 100vh;
-  background: linear-gradient(135deg, #1a0026, #3a005f, #7a006f);
   display: flex;
   justify-content: center;
   align-items: center;
   color: #fff;
   padding: 20px;
+
+  /* New background image */
+  background: url('background.jpg') no-repeat center center;
+  background-size: cover;
+
+  /* Removed previous gradient/blur */
+  /* background: linear-gradient(135deg, #1a0026, #3a005f, #7a006f); */
 }
 
 .container {
@@ -33,7 +39,7 @@ body {
   background: linear-gradient(90deg, #ff4ecd, #c77dff);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
-  background-clip:text;
+  background-clip: text;
 }
 
 .controls {
